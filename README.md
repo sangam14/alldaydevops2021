@@ -10,6 +10,7 @@ Slides
 * [Terraform](https://www.terraform.io/downloads.html)
 * [Kops](https://github.com/kubernetes/kops#installing)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+* [Terrascan](https://github.com/accurics/terrascan)
 
 ## Deploy the environment
 
