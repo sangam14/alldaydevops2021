@@ -1,6 +1,10 @@
 ## less risky business way to reduce cloud native provisioning issues 
 
-# Kubernetes cluster in AWS using kops and Terraform
+
+# Demo -1 
+
+### Before Deploying Kubernetes cluster in AWS using kops and Terraform check misconfigurations & security best practices 
+
 ## Requirements
 * [Terraform](https://www.terraform.io/downloads.html)
 * [Kops](https://github.com/kubernetes/kops#installing)
