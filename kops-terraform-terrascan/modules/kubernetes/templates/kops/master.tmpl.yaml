@@ -1,0 +1,32 @@
+{{$x := .}}
+{{range $i, $subnet := .privateSubnets}}
+{{if $i}}
+---
+{{end}}
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: {{$x.cluster}}.{{$x.dnsZone}}
+  name: master-{{$subnet.zone}}
+spec:
+  image: {{$x.nodeImage}}
+  machineType: {{$x.master.instanceType}}
+  maxSize: 1
+  minSize: 1
+  cloudLabels:
+    k8s.io/cluster-autoscaler/{{$x.cluster}}.{{$x.dnsZone}}: "true"
+    k8s.io/cluster-autoscaler/enabled: "true"
+    # kubernetes.io/cluster/{{$x.cluster}}.{{$x.dnsZone}}: owned
+  nodeLabels:
+    kubelet.kubernetes.io/role: {{$x.master.role}}
+    kops.k8s.io/instancegroup: master-{{$subnet.zone}}
+  role: Master
+  suspendProcesses:
+  - AZRebalance
+  rootVolumeSize: 50
+  rootVolumeOptimization: true
+  subnets:
+  - {{$subnet.name}}
+{{end}}

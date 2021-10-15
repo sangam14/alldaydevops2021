@@ -1,0 +1,5 @@
+  - name: ${name}
+    cidr: ${cidr}
+    id:   ${id}
+    type: ${type}
+    zone: ${az}

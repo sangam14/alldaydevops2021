@@ -1,0 +1,10 @@
+terraform {
+  required_version = "1.0.0"
+  backend "s3"{
+    bucket                 = ""
+    region                 = ""
+    key                    = ""
+    workspace_key_prefix   = ""
+    dynamodb_table         = ""
+  }
+}

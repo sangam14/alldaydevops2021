@@ -1,0 +1,237 @@
+---
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: null
+  name: {{.cluster}}.{{.dnsZone}}
+spec:
+  addons:
+{{range $i, $addon := .addons}}
+  - manifest: {{$addon.name}}
+{{end}}
+  api:
+    loadBalancer:
+      type: Public
+      class: Network
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudConfig:
+    manageStorageClasses: true
+  cloudProvider: aws
+  clusterDNSDomain: {{.cluster}}.{{.dnsZone}}
+  configBase: s3://{{.bucket}}/{{.cluster}}.{{.dnsZone}}
+  configStore: s3://{{.bucket}}/{{.cluster}}.{{.dnsZone}}
+  containerRuntime: containerd
+  containerd:
+    configOverride: |
+      version = 2
+
+      [plugins]
+
+        [plugins."io.containerd.grpc.v1.cri"]
+
+          [plugins."io.containerd.grpc.v1.cri".cni]
+            conf_template = "/etc/containerd/config-cni.template"
+
+          [plugins."io.containerd.grpc.v1.cri".containerd]
+
+            [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+
+              [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+                runtime_type = "io.containerd.runc.v2"
+
+                [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+                  SystemdCgroup = true
+    logLevel: info
+    version: 1.4.6
+  docker:
+    skipInstall: true
+  etcdClusters:
+  - backups:
+      backupStore: s3://{{.bucket}}/{{.cluster}}.{{.dnsZone}}/backups/etcd/main
+    cpuRequest: 200m
+    enableEtcdTLS: true
+    enableTLSAuth: true
+    etcdMembers:
+    {{range $i, $subnet := .privateSubnets}}
+    - instanceGroup: master-{{$subnet.zone}}
+      encryptedVolume: true
+      name: master-{{$subnet.zone}}
+    {{end}}
+    manager: {}
+    memoryRequest: 100Mi
+    name: main
+    provider: Manager
+    version: 3.4.13
+  - backups:
+      backupStore: s3://{{.bucket}}/{{.cluster}}.{{.dnsZone}}/backups/etcd/events
+    cpuRequest: 100m
+    enableEtcdTLS: true
+    enableTLSAuth: true
+    etcdMembers:
+    {{range $i, $subnet := .privateSubnets}}
+    - instanceGroup: master-{{$subnet.zone}}
+      encryptedVolume: true
+      name: master-{{$subnet.zone}}
+    {{end}}
+    manager: {}
+    memoryRequest: 100Mi
+    name: events
+    provider: Manager
+    version: 3.4.13
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  keyStore: s3://{{.bucket}}/{{.cluster}}.{{.dnsZone}}/pki
+  kubeAPIServer:
+    allowPrivileged: true
+    anonymousAuth: false
+    apiAudiences:
+    - kubernetes.svc.default
+    apiServerCount: 1
+    authorizationMode: Node,RBAC
+    bindAddress: 0.0.0.0
+    cloudProvider: aws
+    enableAdmissionPlugins:
+    - NamespaceLifecycle
+    - LimitRanger
+    - ServiceAccount
+    - PersistentVolumeLabel
+    - DefaultStorageClass
+    - DefaultTolerationSeconds
+    - MutatingAdmissionWebhook
+    - ValidatingAdmissionWebhook
+    - NodeRestriction
+    - ResourceQuota
+    etcdServers:
+    - http://127.0.0.1:4001
+    etcdServersOverrides:
+    - /events#http://127.0.0.1:4002
+    image: k8s.gcr.io/kube-apiserver:v1.20.7
+    kubeletPreferredAddressTypes:
+    - InternalIP
+    - Hostname
+    - ExternalIP
+    logLevel: 2
+    requestheaderAllowedNames:
+    - aggregator
+    requestheaderExtraHeaderPrefixes:
+    - X-Remote-Extra-
+    requestheaderGroupHeaders:
+    - X-Remote-Group
+    requestheaderUsernameHeaders:
+    - X-Remote-User
+    securePort: 443
+    serviceAccountIssuer: https://api.internal.{{.cluster}}.{{.dnsZone}}
+    serviceAccountJWKSURI: https://api.internal.{{.cluster}}.{{.dnsZone}}/openid/v1/jwks
+    serviceClusterIPRange: 100.64.0.0/13
+    storageBackend: etcd3
+  kubeControllerManager:
+    allocateNodeCIDRs: true
+    attachDetachReconcileSyncPeriod: 1m0s
+    cloudProvider: aws
+    clusterCIDR: 100.96.0.0/11
+    clusterName: {{.cluster}}.{{.dnsZone}}
+    configureCloudRoutes: true
+    image: k8s.gcr.io/kube-controller-manager:v1.20.7
+    leaderElection:
+      leaderElect: true
+    logLevel: 2
+    useServiceAccountCredentials: true
+  kubeDNS:
+    cacheMaxConcurrent: 150
+    cacheMaxSize: 1000
+    memoryLimit: 170Mi
+    memoryRequest: 70Mi
+    {{ if and .dnsZone (eq .dnsZone "k8s.local") }}
+    domain: cluster.local
+    {{ else }}
+    domain: {{.cluster}}.{{.dnsZone}}
+    {{ end }}
+    replicas: 2
+    serverIP: 100.64.0.10
+  kubeProxy:
+    clusterCIDR: 100.96.0.0/11
+    cpuRequest: 100m
+    hostnameOverride: '@aws'
+    image: k8s.gcr.io/kube-proxy:v1.20.7
+    logLevel: 2
+  kubeScheduler:
+    image: k8s.gcr.io/kube-scheduler:v1.20.7
+    leaderElection:
+      leaderElect: true
+    logLevel: 2
+  kubelet:
+    anonymousAuth: false
+    cgroupDriver: systemd
+    authenticationTokenWebhook: true
+    cgroupRoot: /
+    cloudProvider: aws
+    clusterDNS: 100.64.0.10
+    {{ if and .dnsZone (eq .dnsZone "k8s.local") }}
+    clusterDomain: cluster.local
+    {{ else }}
+    clusterDomain: {{.cluster}}.{{.dnsZone}}
+    {{ end }}
+    evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
+    hostnameOverride: '@aws'
+    kubeconfigPath: /var/lib/kubelet/kubeconfig
+    logLevel: 2
+    nonMasqueradeCIDR: 100.64.0.0/10
+    podManifestPath: /etc/kubernetes/manifests
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  kubernetesVersion: {{.kubernetesVersion}}
+  masterInternalName: api.internal.{{.cluster}}.{{.dnsZone}}
+  masterPublicName: api.{{.cluster}}.{{.dnsZone}}
+  masterKubelet:
+    anonymousAuth: false
+    cgroupRoot: /
+    cgroupDriver: systemd
+    cloudProvider: aws
+    clusterDNS: 100.64.0.10
+    {{ if and .dnsZone (eq .dnsZone "k8s.local") }}
+    clusterDomain: cluster.local
+    {{ else }}
+    clusterDomain: {{.cluster}}.{{.dnsZone}}
+    {{ end }}
+    enableDebuggingHandlers: true
+    evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
+    hostnameOverride: '@aws'
+    kubeconfigPath: /var/lib/kubelet/kubeconfig
+    logLevel: 2
+    networkPluginMTU: 9001
+    networkPluginName: cni
+    nonMasqueradeCIDR: 100.64.0.0/10
+    podManifestPath: /etc/kubernetes/manifests
+    registerSchedulable: false
+  secretStore: s3://{{.bucket}}/{{.cluster}}.{{.dnsZone}}/secrets
+  networkCIDR: {{.vpc.cidr}}
+  networkID: {{.vpc.id}}
+  networking:
+    kubenet: {}
+  nonMasqueradeCIDR: 100.64.0.0/10
+  serviceClusterIPRange: 100.64.0.0/13
+  sshAccess:
+  - 0.0.0.0/0
+  subnets:
+  # Public subnets
+  {{range $i, $subnet := .publicSubnets}}
+  - id:   {{$subnet.id}}
+    name: {{$subnet.name}}
+    type: {{$subnet.type}}
+    zone: {{$subnet.zone}}
+  {{end}}
+  # Private subnets
+  {{range $i, $subnet := .privateSubnets}}
+  - id:   {{$subnet.id}}
+    name: {{$subnet.name}}
+    type: {{$subnet.type}}
+    zone: {{$subnet.zone}}
+  {{end}}
+  topology:
+    dns:
+      type: Public
+    masters: private
+    nodes: private
