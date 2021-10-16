@@ -4,7 +4,10 @@
 
 Slides 
 
+
 ## Demo -1 
+![](https://raw.githubusercontent.com/sangam14/alldaydevops2021/main/kops-terraform-terrascan.drawio.svg)
+
 #### Secure Kubernetes cluster before deploying to AWS using kops & Terraform and terrascan
 ## Requirements
 * [Terraform](https://www.terraform.io/downloads.html)
