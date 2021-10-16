@@ -118,7 +118,7 @@ Scan Summary -
 
 
 
-## Ready Deploy the environment ! 
+## Ready to Deploy the environment ! 
 
 1. Create a `backend.tf` file from `backend.tf.example` and fill the missing values.
 ```
