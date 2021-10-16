@@ -5,7 +5,7 @@
 Slides 
 
 ## Demo -1 
-#### Secure Kubernetes cluster in AWS using kops & Terraform with terrascan
+#### Secure Kubernetes cluster before deploying to AWS using kops & Terraform and terrascan
 ## Requirements
 * [Terraform](https://www.terraform.io/downloads.html)
 * [Kops](https://github.com/kubernetes/kops#installing)
