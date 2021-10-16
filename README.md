@@ -8,14 +8,117 @@ Slides
 ## Demo -1 
 ![](https://raw.githubusercontent.com/sangam14/alldaydevops2021/main/kops-terraform-terrascan.drawio.svg)
 
-#### Secure Kubernetes cluster before deploying to AWS using kops & Terraform and terrascan
+
 ## Requirements
 * [Terraform](https://www.terraform.io/downloads.html)
 * [Kops](https://github.com/kubernetes/kops#installing)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [Terrascan](https://github.com/accurics/terrascan)
 
-## Deploy the environment
+## Install Terrascan 
+
+Native Way
+```
+$ curl -L "$(curl -s https://api.github.com/repos/accurics/terrascan/releases/latest | grep -o -E "https://.+?_Darwin_x86_64.tar.gz")" > terrascan.tar.gz
+$ tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz
+$ install terrascan /usr/local/bin && rm terrascan
+$ terrascan
+```
+
+via brew 
+```
+$ brew install terrascan
+
+```
+## Clone This Repo 
+
+step 1: clone 
+```
+git clone https://github.com/sangam14/alldaydevops2021
+```
+step 2: change dir 
+
+```
+cd kops-terraform-terrascan
+```
+step 3 : scan terraform 
+```
+terrascan scan -t aws -i terraform
+```
+Violation Details -
+
+```
+    
+        Description    :        Ensure VPC flow logging is enabled in all VPCs
+        File           :        kops-terraform-terrascan/modules/vpc/main.tf
+        Module Name    :        network
+        Plan Root      :        kops-terraform-terrascan
+        Line           :        5
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        Ensure VPC flow logging is enabled in all VPCs
+        File           :        kops-terraform-terrascan/modules/vpc/main.tf
+        Module Name    :        root
+        Plan Root      :        kops-terraform-terrascan/modules/vpc
+        Line           :        5
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+
+Scan Summary -
+
+        File/Folder         :   /Users/sangam/Documents/GitHub/alldaydevops2021
+        IaC Type            :   terraform
+        Scanned At          :   2021-10-16 23:39:12.157608 +0000 UTC
+        Policies Validated  :   2
+        Violated Policies   :   2
+        Low                 :   2
+        Medium              :   0
+        High                :   0
+
+
+```
+
+## apply remediation for about violation details 
+
+enable VPC flow logging : flow log records that capture specific traffic flows.
+
+add resource under VPC module
+```
+
+ resource "aws_flow_log" "vpc" {
+ iam_role_arn    = "arn"
+  log_destination = "log"
+ traffic_type    = "ALL"
+   vpc_id          = "${aws_vpc.vpc.id}"
+}
+
+```
+
+Scan again 
+
+```
+
+terrascan scan -t aws -i terraform
+
+Scan Summary -
+
+        File/Folder         :   /Users/sangam/Documents/GitHub/alldaydevops2021
+        IaC Type            :   terraform
+        Scanned At          :   2021-10-16 23:44:55.626183 +0000 UTC
+        Policies Validated  :   2
+        Violated Policies   :   0
+        Low                 :   0
+        Medium              :   0
+        High                :   0
+
+
+```
+
+
+
+## Ready Deploy the environment ! 
 
 1. Create a `backend.tf` file from `backend.tf.example` and fill the missing values.
 ```
