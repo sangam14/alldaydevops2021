@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-10-16T22:55:03.570Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15" etag="Sw81UnVCXi8B2f_9wO0_" version="15.5.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-16T23:08:38.142Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15" etag="e_RAGIsXfBOlqwZIH0VC" version="15.5.4" type="github">
   <diagram id="Sar0BIamfg2dzIX-yc2Z" name="Page-1">
-    <mxGraphModel dx="1298" dy="857" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="519" dy="343" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -124,11 +124,35 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="RGC2bi-JNW6dDql_Kokh-38" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.auto_scaling3;" parent="1" vertex="1">
-          <mxGeometry x="665" y="722.5" width="30" height="30" as="geometry" />
+        <mxCell id="RGC2bi-JNW6dDql_Kokh-38" value="auto scaling" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.auto_scaling3;" parent="1" vertex="1">
+          <mxGeometry x="664" y="704" width="32.5" height="32.5" as="geometry" />
         </mxCell>
-        <mxCell id="RGC2bi-JNW6dDql_Kokh-39" value="Generic group" style="fillColor=none;strokeColor=#5A6C86;dashed=1;verticalAlign=top;fontStyle=0;fontColor=#5A6C86;" parent="1" vertex="1">
+        <mxCell id="RGC2bi-JNW6dDql_Kokh-39" value="" style="fillColor=none;strokeColor=#5A6C86;dashed=1;verticalAlign=top;fontStyle=0;fontColor=#5A6C86;dashPattern=1 1;strokeWidth=3;" parent="1" vertex="1">
           <mxGeometry x="210" y="730" width="913" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-1" value="" style="shape=image;verticalLabelPosition=bottom;verticalAlign=top;imageAspect=0;image=https://raw.githubusercontent.com/kubernetes/kops/master/docs/img/logo-notext.svg;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="903.13" y="80" width="79.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-2" value="&lt;b&gt;Kops&amp;nbsp;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="960" y="100" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-3" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Terraform_Logo.svg/512px-Terraform_Logo.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="695" y="90" width="208.13" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-4" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.accurics.com/wp-content/uploads/2020/08/Terrascan_Logo_38B34A-333F48-300x103.png;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="71.75" width="257.04" height="88.25" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-5" value="&lt;h4 style=&quot;box-sizing: border-box ; margin-top: 24px ; margin-bottom: 16px ; line-height: 1.25 ; color: rgb(36 , 41 , 47)&quot;&gt;&lt;font style=&quot;font-size: 23px&quot;&gt;Secure Kubernetes cluster before deploying to AWS using kops &amp;amp; Terraform and Terrascan&lt;/font&gt;&lt;/h4&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="20" width="1059" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-6" value="@BiradarSangam" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=23;" vertex="1" parent="1">
+          <mxGeometry x="1123" y="1090" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-8" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;fontSize=23;startArrow=classic;startFill=1;startSize=7;endSize=11;strokeColor=default;" edge="1" parent="1" source="SD0CGW0oBtSYjqmEPa8v-6" target="SD0CGW0oBtSYjqmEPa8v-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SD0CGW0oBtSYjqmEPa8v-10" value="" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.weblogos.twitter;fillColor=#1DA1F2;strokeColor=none;fontSize=23;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="1080" width="60" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
