@@ -202,7 +202,7 @@ ip-10-2-4-251.us-west-2.compute.internal   Ready    master   5m    v1.11.9
 
 ## Demo -2 
 
-## Secure your Web App before deploy using Docker/kubernetes/Helm application - thing about security ! 
+## Secure your Web App before deploy using Docker/kubernetes/Helm application - think about security ! 
 
 
 
