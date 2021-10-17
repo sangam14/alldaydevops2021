@@ -80,7 +80,7 @@ Scan Summary -
 
 ```
 
-## apply remediation for about violation details 
+## apply remediation for above violation details 
 
 enable VPC flow logging : flow log records that capture specific traffic flows.
 
