@@ -198,3 +198,11 @@ ip-10-2-4-251.us-west-2.compute.internal   Ready    master   5m    v1.11.9
 ```
 9. To destroy the environment simply run `terraform destroy -var-file=config/env.tfvars` and answer `yes` when prompted.
 10. To manually destroy the cluster run `kops delete cluster <name>.<hosted_zone> --yes`
+
+
+## Demo -2 
+
+# Secure your Web App before deploy using Docker/kubernetes/Helm application - thing about security ! 
+
+
+
