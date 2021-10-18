@@ -396,6 +396,9 @@ Scan Summary -
 ➜  kubeyaml git:(main) 
 
 ```
+## apply remediation for your k8s app 
+
+
 
 
 
