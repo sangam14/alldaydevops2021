@@ -399,7 +399,24 @@ Scan Summary -
 ## apply remediation for your k8s app 
 
 
+ Description    :        Containers Should Not Run with AllowPrivilegeEscalation
+        File           :        backend.yaml
+        File           :        frontend.yaml
+        Severity       :        HIGH
+        
+        Vulnerable  : /vul-k0s-helm-docker/kubeyaml/backend.yaml
+        remediation : /remediation-kubernetes-helm-docker/kubeyaml/backend.ya
+        
+        
+      
+        -----------------------------------------------------------------------
 
+        Description    :        Minimize Admission of Root Containers
+        File           :        backend.yaml
+        File           :        frontend.yaml
+        Severity       :        HIGH
+        
+       -----------------------------------------------------------------------
 
 
 
