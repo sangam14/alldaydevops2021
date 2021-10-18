@@ -1,0 +1,21 @@
+body {
+  background: url("https://picsum.photos/1920/1080") no-repeat center center
+    fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.btn-primary-outline {
+  background-color: #777;
+  opacity: 0.9;
+  border-color: #ccc;
+}
+
+.opaque {
+  background-color: #ccc;
+  opacity: 0.9;
+  border-color: #ccc;
+  padding: 30px 30px 30px 30px;
+}

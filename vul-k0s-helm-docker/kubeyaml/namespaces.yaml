@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development
+  labels:
+    stage: development
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: staging
+  labels:
+    stage: staging

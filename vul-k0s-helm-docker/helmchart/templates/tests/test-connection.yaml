@@ -1,0 +1,35 @@
+{{- if .Values.frontend.enabled -}}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "simplefrontend-service.fullname" . }}-test-connection"
+  labels:
+    {{- include "simpleapp.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "simplefrontend-service.fullname" . }}:{{ .Values.frontend.service.port }}/']
+  restartPolicy: Never
+{{- end }}
+---
+{{- if .Values.backend.enabled -}}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "simplebackend-service.fullname" . }}-test-connection"
+  labels:
+    {{- include "simpleapp.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "simplebackend-service.fullname" . }}:8080/']
+  restartPolicy: Never
+{{- end }}

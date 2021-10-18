@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-dpl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend-container
+          imagePullPolicy: Always
+          image: lmnzr/simplebackend@sha256:cb5c1bddd1b5665e1867a7fa1b5fa843a47ee433bbb75d4293888b71def53229
+          readinessProbe:
+           httpGet:
+            path: /health
+            port: 80
+            initialDelaySeconds: 60
+          livenessProbe:
+           httpGet:
+            path: /health
+            port: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+          securityContext:
+              allowPrivilegeEscalation: false
+              runAsNonRoot: true
+              readOnlyRootFilesystem: true
+              seccompProfile:
+                  type: RuntimeDefault
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    app: backend
