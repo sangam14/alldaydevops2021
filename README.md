@@ -473,4 +473,6 @@ Scan Summary -
 
 ```
 
+## Demo 3 - Level Up Your Policy as Code Skills with Terrascan Rego Editor 
+
 
