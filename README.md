@@ -439,6 +439,38 @@ Scan Summary -
 Now look better and secure ! 
 
 
+# Also You can scan your dockerfile 
 
+```
+simpleapp git:(main) terrascan scan -i docker -d backend 
+
+
+Scan Summary -
+
+        File/Folder         :   /Users/sangam/Documents/GitHub/alldaydevops2021/remediation-kubernetes-helm-docker/simpleapp/backend
+        IaC Type            :   docker
+        Scanned At          :   2021-10-22 09:17:09.859337 +0000 UTC
+        Policies Validated  :   23
+        Violated Policies   :   0
+        Low                 :   0
+        Medium              :   0
+        High                :   0
+➜  simpleapp git:(main) terrascan scan -i docker -d frontend 
+
+
+Scan Summary -
+
+        File/Folder         :   /Users/sangam/Documents/GitHub/alldaydevops2021/remediation-kubernetes-helm-docker/simpleapp/frontend
+        IaC Type            :   docker
+        Scanned At          :   2021-10-22 09:17:20.832959 +0000 UTC
+        Policies Validated  :   23
+        Violated Policies   :   0
+        Low                 :   0
+        Medium              :   0
+        High                :   0
+➜  simpleapp git:(main)
+
+
+```
 
 
