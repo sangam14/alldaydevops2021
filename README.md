@@ -398,25 +398,46 @@ Scan Summary -
 ```
 ## apply remediation for your k8s app 
 
-
- Description    :        Containers Should Not Run with AllowPrivilegeEscalation
-        File           :        backend.yaml
-        File           :        frontend.yaml
-        Severity       :        HIGH
-        
-        Vulnerable  : /vul-k0s-helm-docker/kubeyaml/backend.yaml
-        remediation : /remediation-kubernetes-helm-docker/kubeyaml/backend.ya
-        
-        
-      
+```
+cd remediation-kubernetes-helm-docker
+ remediation-kubernetes-helm-docker git:(main) terrascan scan -i k8s   
+ 
+ Violation Details -
+    
+        Description    :        Nodeport service can expose the worker nodes as they have public interface
+        File           :        kubeyaml/frontend.yaml
+        Line           :        54
+        Severity       :        LOW
         -----------------------------------------------------------------------
 
-        Description    :        Minimize Admission of Root Containers
-        File           :        backend.yaml
-        File           :        frontend.yaml
-        Severity       :        HIGH
-        
-       -----------------------------------------------------------------------
+        Description    :        Apply Security Context to Your Pods and Containers
+        File           :        kubeyaml/backend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Apply Security Context to Your Pods and Containers
+        File           :        kubeyaml/frontend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+
+Scan Summary -
+
+        File/Folder         :   /Users/sangam/Documents/GitHub/alldaydevops2021/remediation-kubernetes-helm-docker
+        IaC Type            :   k8s
+        Scanned At          :   2021-10-22 09:13:10.246372 +0000 UTC
+        Policies Validated  :   41
+        Violated Policies   :   3
+        Low                 :   1
+        Medium              :   2
+        High                :   0
+ 
+```
+
+Now look better and secure ! 
+
 
 
 
