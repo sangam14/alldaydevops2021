@@ -439,7 +439,7 @@ Scan Summary -
 Now look better and secure ! 
 
 
-# Also You can scan your dockerfile 
+## Also You can scan your dockerfile 
 
 ```
 simpleapp git:(main) terrascan scan -i docker -d backend 
