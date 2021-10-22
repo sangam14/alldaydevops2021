@@ -204,5 +204,220 @@ ip-10-2-4-251.us-west-2.compute.internal   Ready    master   5m    v1.11.9
 
 ## Secure your Web App before deploy using Docker/kubernetes/Helm application - think about security ! 
 
+Simple Hello World App Written in GoLang.  Including Kubernetes deployment YAML file and Helm Chart.
+
+step 1:
+
+```
+ cd vul-k0s-helm-docker/kubeyaml/
+
+```
+Step 2 :
+Scan your K8s app 
+```
+terrascan scan -i k8s             
+
+
+Violation Details -
+    
+        Description    :        Apply Security Context to Your Pods and Containers
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Apply Security Context to Your Pods and Containers
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Containers Should Not Run with AllowPrivilegeEscalation
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        HIGH
+        -----------------------------------------------------------------------
+
+        Description    :        Containers Should Not Run with AllowPrivilegeEscalation
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        HIGH
+        -----------------------------------------------------------------------
+
+        Description    :        Minimize Admission of Root Containers
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        HIGH
+        -----------------------------------------------------------------------
+
+        Description    :        Minimize Admission of Root Containers
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        HIGH
+        -----------------------------------------------------------------------
+
+        Description    :        Container images with readOnlyRootFileSystem set as false mounts the container root file system with write permissions
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Container images with readOnlyRootFileSystem set as false mounts the container root file system with write permissions
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        No readiness probe will affect automatic recovery in case of unexpected errors
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        No readiness probe will affect automatic recovery in case of unexpected errors
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        No liveness probe will ensure there is no recovery in case of unexpected errors
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        No liveness probe will ensure there is no recovery in case of unexpected errors
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        AppArmor profile not set to default or custom profile will make the container vulnerable to kernel level threats
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        AppArmor profile not set to default or custom profile will make the container vulnerable to kernel level threats
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Default seccomp profile not enabled will make the container to make non-essential system calls
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Default seccomp profile not enabled will make the container to make non-essential system calls
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Nodeport service can expose the worker nodes as they have public interface
+        File           :        frontend.yaml
+        Line           :        28
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        CPU Request Not Set in config file.
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        Medium
+        -----------------------------------------------------------------------
+
+        Description    :        CPU Request Not Set in config file.
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        Medium
+        -----------------------------------------------------------------------
+
+        Description    :        Image without digest affects the integrity principle of image security
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        Image without digest affects the integrity principle of image security
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        MEDIUM
+        -----------------------------------------------------------------------
+
+        Description    :        No owner for namespace affects the operations
+        File           :        namespaces.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        No owner for namespace affects the operations
+        File           :        namespaces.yaml
+        Line           :        9
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        Memory Request Not Set in config file.
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        Medium
+        -----------------------------------------------------------------------
+
+        Description    :        Memory Request Not Set in config file.
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        Medium
+        -----------------------------------------------------------------------
+
+        Description    :        No tag or container image with :Latest tag makes difficult to rollback and track
+        File           :        backend.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+        Description    :        No tag or container image with :Latest tag makes difficult to rollback and track
+        File           :        frontend.yaml
+        Line           :        1
+        Severity       :        LOW
+        -----------------------------------------------------------------------
+
+
+Scan Summary -
+
+        File/Folder         :   /Users/sangam/Documents/GitHub/alldaydevops2021/vul-k0s-helm-docker/kubeyaml
+        IaC Type            :   k8s
+        Scanned At          :   2021-10-18 08:08:30.920245 +0000 UTC
+        Policies Validated  :   41
+        Violated Policies   :   27
+        Low                 :   9
+        Medium              :   14
+        High                :   4
+➜  kubeyaml git:(main) 
+
+```
+## apply remediation for your k8s app 
+
+
+ Description    :        Containers Should Not Run with AllowPrivilegeEscalation
+        File           :        backend.yaml
+        File           :        frontend.yaml
+        Severity       :        HIGH
+        
+        Vulnerable  : /vul-k0s-helm-docker/kubeyaml/backend.yaml
+        remediation : /remediation-kubernetes-helm-docker/kubeyaml/backend.ya
+        
+        
+      
+        -----------------------------------------------------------------------
+
+        Description    :        Minimize Admission of Root Containers
+        File           :        backend.yaml
+        File           :        frontend.yaml
+        Severity       :        HIGH
+        
+       -----------------------------------------------------------------------
+
+
 
 
