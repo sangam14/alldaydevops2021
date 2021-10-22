@@ -1,17 +1,19 @@
+annotations:
+  seccomp.security.alpha.kubernetes.io/pod: "docker/default" 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-dpl
-annotations:
-  seccomp.security.alpha.kubernetes.io/pod: "docker/default" 
-  container.apparmor.security.beta.kubernetes.io/hello: localhost/k8s-apparmor-example-deny-write
-
 spec:
-  replicas: 1
-  selector:
+securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+replicas: 1
+selector:
     matchLabels:
       app: frontend
-  template:
+template:
     metadata:
       labels:
         app: frontend
@@ -43,10 +45,10 @@ spec:
           securityContext:
               allowPrivilegeEscalation: false
               runAsNonRoot: true
-              runAsUser: 1000
-              fsGroup: 2000
+              runAsUser: 2000
               readOnlyRootFilesystem: true
-             
+              seccompProfile:
+                  type: RuntimeDefault
          
 ---
 apiVersion: v1
