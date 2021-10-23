@@ -1,0 +1,16 @@
+{
+	"name": "policyName",
+	"file": "SANGAM_AWS_0003.rego",
+	"policy_type": "AWS",
+	"resource_type": "aws_s3_bucket",
+	"template_args": {
+		"name": "policyName",
+		"prefix": "",
+		"suffix": ""
+	},
+	"severity": "LOW",
+	"description": "Detect s3 public bucket",
+	"category": "Identety and access mangement",
+	"version": 1,
+	"id": "SANGAM_AWS_0003"
+}

@@ -1,0 +1,45 @@
+{
+	"terrascanConfig": {
+		"aws_s3_bucket": [
+			{
+				"id": "aws_s3_bucket.bucket",
+				"name": "bucket",
+				"module_name": "root",
+				"source": "main.tf",
+				"line": 7,
+				"type": "aws_s3_bucket",
+				"config": {
+					"acl": "public-read",
+					"bucket": "${var.bucket_name}",
+					"cors_rule": [
+						{
+							"allowed_headers": [
+								"*"
+							],
+							"allowed_methods": [
+								"PUT",
+								"POST"
+							],
+							"allowed_origins": [
+								"*"
+							],
+							"expose_headers": [
+								"ETag"
+							],
+							"max_age_seconds": 3000
+						}
+					],
+					"policy": "{\n    \"Version\": \"2008-10-17\",\n    \"Statement\": [\n        {\n            \"Sid\": \"PublicReadForGetBucketObjects\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"*\"\n            },\n            \"Action\": \"s3:GetObject\",\n            \"Resource\": \"arn:aws:s3:::${var.bucket_name}/*\"\n        }\n    ]\n}\n"
+				},
+				"skip_rules": null,
+				"max_severity": "",
+				"min_severity": ""
+			}
+		]
+	},
+	"iacMetadata": {
+		"iacType": "terraform",
+		"iacPath": "terraform-rego/main.tf",
+		"providerType": "AWS"
+	}
+}
