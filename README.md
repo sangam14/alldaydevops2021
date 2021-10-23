@@ -476,5 +476,12 @@ Scan Summary -
 ## Demo 3 - Level Up Your Policy as Code Skills with Terrascan Rego Editor 
 ![](https://raw.githubusercontent.com/sangam14/alldaydevops2021/main/Terrascan_RE_Logo_38B34A-333F48.png)
 - [Download Terrascan Rego Editor VScode extension from marketplace](https://marketplace.visualstudio.com/items?itemName=accuricsinc.terrascan-rego-editor)
+
+```
+cd terraform-rego/
+```
+
+Step: 
+
 ![Terrascan Rego Editor demo](./terrascan-rego-editor-demo.gif)
 
