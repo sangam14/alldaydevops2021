@@ -2,7 +2,7 @@
 
 ## Talk Title :- less risky business way to reduce cloud native provisioning issues 
 
-Slides 
+-[Slides](https://slides.com/sangambiradar/addo-sangambiradar)
 
 
 ## Demo -1 
